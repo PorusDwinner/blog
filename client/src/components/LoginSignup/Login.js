@@ -1,8 +1,13 @@
 import '../../styles/Login.css';
 import { useState } from "react";
-import { setUserName } from "../../slicer/slicer";
+import { setUserName, setLoginState } from "../../slicer/slicer";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [loginForm , setLoginForm] = useState({
         username : '',
@@ -11,50 +16,37 @@ const Login = () => {
 
     const handelChange = (e) => {
         const {name , value} = e.target;
-        setLoginForm((prev) => ({ ...prev , [name] : value }));
+        setLoginForm((prev) => ({ ...prev , [name] : value }))
     };
 
     const handelLogin = () => {
         // api to validate user here
-        dispatchEvent(setUserName(loginForm.username));
+        dispatch(setUserName(loginForm.username))
+        dispatch(setLoginState())
     }
 
     return (
-        <div className="position-absolute top-50 start-50 p-3 border">
+        <div className='container mt-5'>
             <form>
-                <feildset>
-                    <legend className='text-center text-muted'>Hi...Welcome</legend>
-                    <div className='mb-3'>
+                <>
+                    <legend className='text-center text-muted'>Hi...Welcome To Blog Post</legend>
+                    <div className='mb-4'>
                         <input type='text' className='form-control' placeholder='Username...'
                         name='username' onChange={(e) => handelChange(e)} />
                     </div>
-                    <div className='mb-3'>
-                        <input type='text' className='form-control' placeholder='Username...'
+                    <div className='mb-4'>
+                        <input type='text' className='form-control' placeholder='Password...'
                         name='password' onChange={(e) => handelChange(e)} />
                     </div>
-                </feildset>
+                    <div className='d-flex'>
+                    <button type="submit" className='btn btn-primary' onClick={() => handelLogin()}>Login</button>
+                    <p className='ms-3'>OR</p>
+                    <button type="button" className='btn btn-primary ms-3' onClick={() => navigate('/signup')}>Sign Up</button>
+                    </div>
+                </>
             </form>
         </div>
     )
 }
 
 export default Login;
-
-{/* <div className="d-flex justify-content-center align-items-center">
-            <form>
-                <fieldset>
-                    <legend className="text-center text-muted">Hi...Welcome back</legend>
-                    <div className="mb-3">
-                        <label htmlFor="disabledTextInput" className="form-label">Username</label>
-                        <input type="text" id="disabledTextInput" className="form-control" placeholder="Enter Username..."
-                        name="username" onChange={(e) => handelChange(e)}/>
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="disabledTextInput" className="form-label">Password</label>
-                        <input type="text" id="disabledTextInput" className="form-control" placeholder="Password..."
-                        name="password" onChange={(e) => handelChange(e)}/>
-                    </div>
-                    <button type="submit" className="btn btn-primary" onClick={() => handelLogin()}>Login</button>
-                </fieldset>
-            </form>
-        </div> */}
