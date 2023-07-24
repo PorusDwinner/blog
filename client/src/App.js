@@ -14,7 +14,8 @@ function App() {
     <Topbar/>
       <Routes>
         <Route exact path="/" element={ loginState ? <Home/> : <Login/> } />
-        <Route exact path="/signup" element={ loginState ? <Home/> : <signup/> } />
+        <Route exact path="/signup" element={ <Signup/> } />
+        <Route exact path="/home" element={ <Home/> } />
       </Routes>
     </BrowserRouter>
   );

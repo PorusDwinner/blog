@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 const Topbar = () => {
 
   const username = useSelector(state => state.userName);
+  const post = useSelector(state => state.totalPost);
 
   return (
     <div>
@@ -22,6 +23,10 @@ const Topbar = () => {
                 <Link className="nav-link">Features</Link>
               </li>
             </ul>
+            <span className="navbar-text me-3 px-1 py-1 border rounded">Create</span>
+            <span className="navbar-text me-3">
+              Posts<span className='border rounded-circle px-2 py-1 ms-1 bg-success'>{post}</span>
+            </span>
             <span className="navbar-text">
               {username}
             </span>

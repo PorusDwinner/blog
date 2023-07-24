@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     loginState : false,
-    userName : 'dummy_Name'
+    userName : 'dummy_Name',
+    totalPost : 0,
 };
 
 export const slicer = createSlice({
